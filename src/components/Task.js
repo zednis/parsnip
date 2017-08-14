@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Card, CardTitle, CardText, CardActions, SelectField, MenuItem } from 'material-ui';
+
 const TASK_STATUSES = [
     'Unstarted',
     'In Progress',
@@ -8,17 +10,22 @@ const TASK_STATUSES = [
 
 const Task = props => {
 	return (
-		<div className="task">
-			<div className="task-header">
-				<div>{props.task.title}</div>
-				<select value={props.task.status}>
-					{TASK_STATUSES.map(status => (<option key={status} value={status}>{status}</option>))}
-				</select>
-			</div>
-			<hr />
-			<div className="task-body">{props.task.description}</div>
-		</div>
+		<Card>
+			<CardTitle title={props.task.title}/>
+			<CardText>{props.task.description}</CardText>
+			<CardActions>
+				<SelectField value={props.task.status} onChange={onStatusChange}>
+					{TASK_STATUSES.map(status => (
+						<MenuItem key={status} value={status} primaryText={status}/>
+					))}
+				</SelectField>
+			</CardActions>
+		</Card>
 	);
+
+    function onStatusChange(e, index, value) {
+        props.onStatusChange(props.task.id, value)
+    }
 };
 
 export default Task;

@@ -7,10 +7,16 @@ export function uniqueId() {
     return _id++;
 }
 
+export const actions = {
+    CREATE_TASK: "CREATE_TASK",
+    EDIT_TASK: "EDIT_TASK",
+    DELETE_TASK: "DELETE_TASK"
+};
+
 export function createTask({title, description}) {
 
     return {
-        type: 'CREATE_TASK',
+        type: actions.CREATE_TASK,
         payload: {
             id: uniqueId(),
             title: title,
@@ -23,7 +29,7 @@ export function createTask({title, description}) {
 export function editTask(id, params={}) {
 
     return {
-        type: 'EDIT_TASK',
+        type: actions.EDIT_TASK,
         payload: {
             id,
             params
@@ -33,7 +39,7 @@ export function editTask(id, params={}) {
 
 export function deleteTask(id) {
     return {
-        type: 'DELETE_TASK',
+        type: actions.DELETE_TASK,
         payload: {
             id
         }

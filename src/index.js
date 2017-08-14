@@ -7,7 +7,13 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-const store = createStore(tasks);
+import { devToolsEnhancer } from 'redux-devtools-extension';
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+const store = createStore(tasks, devToolsEnhancer());
+
+injectTapEventPlugin();
 
 ReactDOM.render(
     <Provider store={store}>

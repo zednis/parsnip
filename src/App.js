@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+
 import { createTask, editTask } from './actions';
 import TasksPage from './components/TasksPage';
 
@@ -18,10 +21,12 @@ class App extends Component {
     render() {
         return (
             <div className="main-content">
-                <TasksPage tasks={this.props.tasks}
-                           onCreateTask={this.onCreateTask}
-                           onStatusChange={this.onStatusChange}
-                />
+                <MuiThemeProvider>
+                    <TasksPage tasks={this.props.tasks}
+                               onCreateTask={this.onCreateTask}
+                               onStatusChange={this.onStatusChange}
+                    />
+                </MuiThemeProvider>
             </div>
         );
     }

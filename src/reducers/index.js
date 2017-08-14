@@ -1,4 +1,4 @@
-import { uniqueId } from '../actions';
+import { uniqueId, actions } from '../actions';
 
 const mockTasks = [
     {
@@ -23,8 +23,33 @@ const mockTasks = [
 
 export default function tasks(state = { tasks: mockTasks }, action) {
 
-    if (action.type === 'CREATE_TASK') {
+    if (action.type === actions.CREATE_TASK) {
         return { tasks: state.tasks.concat(action.payload)};
+    }
+
+    if (action.type === actions.EDIT_TASK) {
+        const { payload } = action;
+        return {
+            tasks: state.tasks.map(task => {
+                if(task.id === payload.id) {
+                    return Object.assign({}, task, payload.params);
+                }
+                return task;
+            })
+        }
+    }
+
+    // not sure if this works...
+    if (action.type === actions.DELETE_TASK) {
+        const { payload } = action;
+        return {
+            tasks: state.tasks.map(task => {
+                if(task.id === payload.id) {
+                    return null;
+                }
+                return task;
+            })
+        }
     }
 
     return state
