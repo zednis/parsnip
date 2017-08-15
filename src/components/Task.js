@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Card, CardTitle, CardText, CardActions, SelectField, MenuItem } from 'material-ui';
+import { Card, CardTitle, CardText, CardActions, SelectField, MenuItem, FlatButton } from 'material-ui';
 
 const TASK_STATUSES = [
     'Unstarted',
@@ -19,6 +19,7 @@ const Task = props => {
 						<MenuItem key={status} value={status} primaryText={status}/>
 					))}
 				</SelectField>
+				<FlatButton label="DELETE" onTouchTap={onDelete}/>
 			</CardActions>
 		</Card>
 	);
@@ -26,6 +27,10 @@ const Task = props => {
     function onStatusChange(e, index, value) {
         props.onStatusChange(props.task.id, value)
     }
+
+    function onDelete(e) {
+    	props.onDelete(props.task.id)
+	}
 };
 
 export default Task;

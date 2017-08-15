@@ -1,7 +1,7 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+// import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
 export default class NewTaskDialog extends React.Component {
@@ -69,7 +69,7 @@ export default class NewTaskDialog extends React.Component {
 
         return (
             <div>
-                <RaisedButton label="New Task" onTouchTap={this.handleOpen} />
+                <FlatButton label="New Task" onTouchTap={this.handleOpen} />
                 <Dialog
                     title="Create New Task"
                     actions={actions}
@@ -77,14 +77,14 @@ export default class NewTaskDialog extends React.Component {
                     open={this.state.open}>
 
                     <TextField id="task-title"
-                        hintText="Title"
-                        value={this.state.title}
-                        onChange={this.onTitleChange}/>
+                               hintText="Title"
+                               value={this.state.title}
+                               onChange={this.onTitleChange}/>
                     <br/>
                     <TextField id="task-description"
-                    hintText="Description"
-                    value={this.state.description}
-                    onChange={this.onDescriptionChange}/>
+                               hintText="Description"
+                               value={this.state.description}
+                               onChange={this.onDescriptionChange}/>
                     <br/>
 
                 </Dialog>

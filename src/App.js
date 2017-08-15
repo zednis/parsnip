@@ -5,17 +5,25 @@ import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
-import { createTask, editTask } from './actions';
+import { createTask, editTask, deleteTask, fetchTasks } from './actions';
 import TasksPage from './components/TasksPage';
 
 class App extends Component {
+
+    componentDidMount() {
+        this.props.dispatch(fetchTasks());
+    };
 
     onCreateTask = ({title, description}) => {
         this.props.dispatch(createTask({title, description}));
     };
 
     onStatusChange = (id, status) => {
-        this.props.dispatch(editTask(id, {status}))
+        this.props.dispatch(editTask(id, {status}));
+    };
+
+    onDelete = (id) => {
+        this.props.dispatch(deleteTask(id));
     };
 
     render() {
@@ -25,6 +33,7 @@ class App extends Component {
                     <TasksPage tasks={this.props.tasks}
                                onCreateTask={this.onCreateTask}
                                onStatusChange={this.onStatusChange}
+                               onDelete={this.onDelete}
                     />
                 </MuiThemeProvider>
             </div>
