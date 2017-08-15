@@ -7,6 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import { createTask, editTask, deleteTask, fetchTasks } from './actions';
 import TasksPage from './components/TasksPage';
+import ErrorMessage from "./components/ErrorMessage";
 
 class App extends Component {
 
@@ -28,23 +29,30 @@ class App extends Component {
 
     render() {
         return (
-            <div className="main-content">
-                <MuiThemeProvider>
-                    <TasksPage tasks={this.props.tasks}
-                               onCreateTask={this.onCreateTask}
-                               onStatusChange={this.onStatusChange}
-                               onDelete={this.onDelete}
-                    />
-                </MuiThemeProvider>
+            <div className="container">
+                {this.props.error && <ErrorMessage message={this.props.error}/>}
+                <div className="main-content">
+                    <MuiThemeProvider>
+                        <TasksPage tasks={this.props.tasks}
+                                   onCreateTask={this.onCreateTask}
+                                   onStatusChange={this.onStatusChange}
+                                   onDelete={this.onDelete}
+                                   isLoading={this.props.isLoading}
+                        />
+                    </MuiThemeProvider>
+                </div>
             </div>
         );
     }
 }
 
 function mapStateToProps(state) {
+    const { tasks, isLoading, error } = state.tasks;
     return {
-        tasks: state.tasks
-    }
+        tasks,
+        isLoading,
+        error
+    };
 }
 
 export default connect(mapStateToProps) (App);

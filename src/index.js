@@ -4,17 +4,26 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
-import tasks from './reducers'
+import tasksReducer from './reducers'
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-
 import { composeWithDevTools } from 'redux-devtools-extension';
-
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
+// TODO replace with combineReducers
+const rootReducer = (state = {}, action) => {
+
+    console.log(state);
+
+    return {
+        tasks: tasksReducer(state.tasks, action),
+        // projects: projectsReducer(state.projects, action)
+    }
+};
+
 const store = createStore(
-    tasks,
+    rootReducer,
     composeWithDevTools(applyMiddleware(thunk))
 );
 

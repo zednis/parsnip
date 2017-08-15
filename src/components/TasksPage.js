@@ -31,6 +31,20 @@ class TasksPage extends Component {
 	}
 
 	render() {
+
+        if(this.props.isLoading) {
+            return (
+                <div className="tasks-list">
+                    <AppBar title={<span style={styles.title}>Tasks</span>}
+                            iconElementRight={<NewTaskDialog onCreateTask={this.props.onCreateTask}/>}
+                    />
+                    <div className="tasks-loading">
+                        Loading...
+                    </div>
+                </div>
+            );
+        }
+
 		return (
 			<div className="tasks-list">
 				<AppBar title={<span style={styles.title}>Tasks</span>}

@@ -8,6 +8,7 @@
 - [ ] Add edit modal to Task
 - [ ] Support drag and drop for Task status edit
 - [ ] Configure Hot Module Replacement (src/index.js)
+- [ ] Configure Error message as Snackbar
 
 
 click on task to edit from board?
